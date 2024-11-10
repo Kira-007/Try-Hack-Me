@@ -102,7 +102,7 @@ sudo -l
 ## Escalate Privilage
 To escalate privilage we need to exploit vim
 ```
-sudo vi
+sudo vim
 ```
 ![image](./ScreenShots/sudo.png)
 ### What's the root flag?
